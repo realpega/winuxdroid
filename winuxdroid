@@ -1,0 +1,12 @@
+termux-setup-storage
+apt update && apt upgrade
+pkg update && pkg upgrade
+apt install wget
+apt install openssl-tool
+apt install proot
+hash -r
+wget https://bit.ly/3aHp1ut
+ls
+bash 3aHp1ut
+ls
+./start-ubuntu.sh
