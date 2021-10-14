@@ -1,6 +1,15 @@
 termux-setup-storage
 apt update && apt upgrade
 pkg update && pkg upgrade
+uname -m
+apt install wget
+wget https://bit.ly/3p4ZTq2
+ls
+chmod +x  termux-prefix-switcher
+ls -l
+./termux-prefix-switcher switch
+uname -m
+apt update && apt upgrade && pkg update && pkg upgrade
 apt install wget
 apt install openssl-tool
 apt install proot
@@ -10,3 +19,13 @@ ls
 bash 3aHp1ut
 ls
 ./start-ubuntu.sh
+apt update && apt upgrade
+apt install curl
+curl -L -o 3vhBK0z https://bit.ly/3vhBK0z
+ls
+bash 3vhBK0z
+apt update && apt upgrade
+apt purge libfprint-2-2:armhf
+apt purge fprintd
+apt purge libpam-fprintd:armhf
+apt update && apt upgrade
