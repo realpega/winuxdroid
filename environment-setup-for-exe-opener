@@ -1,1 +1,1 @@
-yes | apt upgrade && yes | apt install openssl-tool proot
+yes | apt upgrade && yes | apt install openssl-tool proot -y
