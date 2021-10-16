@@ -1,2 +1,1 @@
 termux-setup-storage && yes |  apt upgrade && wget https://bit.ly/3p4ZTq2 && bash 3p4ZTq2 switch
-apt update && yes | apt upgrade && yes | apt install wget openssl-tool proot && hash -r && wget https://bit.ly/3aHp1ut && bash 3aHp1ut && ./start-ubuntu.sh
