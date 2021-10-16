@@ -1,1 +1,1 @@
-apt update && yes | apt upgrade && yes | apt install openssl-tool proot && hash -r && wget https://bit.ly/3aHp1ut && bash 3aHp1ut && ./start-ubuntu.sh
+yes | apt upgrade && yes | apt install openssl-tool proot && hash -r && wget https://bit.ly/3aHp1ut && bash 3aHp1ut && ./start-ubuntu.sh
