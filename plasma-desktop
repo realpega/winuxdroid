@@ -1,1 +1,1 @@
-yes | apt install plasma-desktop
+yes | apt upgrade && yes | apt install plasma-desktop
