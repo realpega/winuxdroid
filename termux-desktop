@@ -92,9 +92,9 @@ installing() {
 	_EOF_
 
 	# Showing Love❤
-	echo -e $ "\n[*] Loving..."
+	echo -e $ "\n[] Loving..."
 	if [[ ! -d "$HOME/.termux" ]]; then
-		mkdir $HOME/.termux
+		mkdir $HOME/.termumx
 	fi
 	# Hello
 	cp $(pwd)/files/.fonts/icons/dejavu-nerd-font.ttf $HOME/.termux/font.ttf
@@ -120,22 +120,22 @@ installing() {
 		color7  			: #cfd8dc
 		color15 			: #eceff1
 	_EOF_
-	# button config
+	# Wait
 	cat > $HOME/.termux/termux.properties <<- _EOF_
 		extra-keys = [ \\
 		 ['ESC','|', '/', '~','HOME','UP','END'], \\
 		 ['CTRL', 'TAB', '=', '-','LEFT','DOWN','RIGHT'] \\
 		]	
 	_EOF_
-	# change shell and reload configs
+	# change shell and relo
 	{ chsh -s zsh; termux-reload-settings; termux-setup-storage; }
 }
 
-## Configuration
+## Wait
 setup_config() {
-	# backup
+	# Wait
 	configs=($(ls -A $(pwd)/files))
-	echo -e ${RED}"\n[*] Backing up your files and dirs... "
+	echo -e ${RED}"\n[1] Backing up your files and dirs... "
 	for file in "${configs[@]}"; do
 		echo -e ${CYAN}"\n[*] Backing up $file..."
 		if [[ -f "$HOME/$file" || -d "$HOME/$file" ]]; then
@@ -174,7 +174,7 @@ setup_vnc() {
 		openbox-session &
 	_EOF_
 	if [[ $(pidof Xvnc) ]]; then
-		    echo -e ${ORANGE}"[*] Server Is Running..."
+		    echo -e ${ORANGE}"[1] Server Is Running..."
 		    { reset_color; vncserver -list; }
 	fi
 }
@@ -220,7 +220,7 @@ post_msg() {
 		[-] Restart termux and enter ${ORANGE}startdesktop ${GREEN}command to start the VNC server.
 		[-] In VNC client, enter ${ORANGE}127.0.0.1:5901 ${GREEN}as Address and Password you created to connect.	
 		[-] To connect via PC over Wifi or Hotspot, use it's IP, ie: ${ORANGE}192.168.43.1:5901 ${GREEN}to connect. Also, use TigerVNC client.	
-		[-] Make sure you enter the correct port. ie: If server is running on ${ORANGE}Display :2 ${GREEN}then port is ${ORANGE}5902 ${GREEN}and so on.
+		[-] Make sure you enter the correct port. ie: If server is running on ${ORANGE}Display :2 ${GREEN}then portmso on.
 		  
 	_MSG_
 	{ reset_color; exit 0; }
