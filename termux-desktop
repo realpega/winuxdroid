@@ -6,71 +6,27 @@
 
 ## Termux Desktop
 
-## ANSI Colors (FG & BG)
-RED="$(printf '\033[31m')"  GREEN="$(printf '\033[32m')"  ORANGE="$(printf '\033[33m')"  BLUE="$(printf '\033[34m')"
-MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"  WHITE="$(printf '\033[37m')" BLACK="$(printf '\033[30m')"
-REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf '\033[43m')"  BLUEBG="$(printf '\033[44m')"
-MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
-
-## Reset terminal colors
-reset_color() {
-	printf '\033[37m'
-}
-
-## Script Termination
-exit_on_signal_SIGINT() {
-    { printf "${RED}\n\n%s\n\n" "[!] Program Interrupted." 2>&1; reset_color; }
-    exit 0
-}
-
-exit_on_signal_SIGTERM() {
-    { printf "${RED}\n\n%s\n\n" "[!] Program Terminated." 2>&1; reset_color; }
-    exit 0
-}
-
-trap exit_on_signal_SIGINT SIGINT
-trap exit_on_signal_SIGTERM SIGTERM
-
-## Banner
-banner() {
-	clear
-    cat <<- EOF
-		${RED}┌──────────────────────────────────────────────────────────┐
-		${RED}│${GREEN}░░░▀█▀░█▀▀░█▀▄░█▄█░█░█░█░█░░░█▀▄░█▀▀░█▀▀░█░█░▀█▀░█▀█░█▀█░░${RED}│
-		${RED}│${GREEN}░░░░█░░█▀▀░█▀▄░█░█░█░█░▄▀▄░░░█░█░█▀▀░▀▀█░█▀▄░░█░░█░█░█▀▀░░${RED}│
-		${RED}│${GREEN}░░░░▀░░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░▀░░░▀▀░░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░░░░${RED}│
-		${RED}└──────────────────────────────────────────────────────────┘
-		${BLUE}By : Aditya Shakya // @adi1090x
-	EOF
-}
-
-## Show usages
-usage() {
-	banner
-	echo -e ${ORANGE}"\nInstall GUI (Openbox Desktop) on Termux"
-	echo -e ${ORANGE}"Usages : $(basename $0) --install | --uninstall \n"
-}
-
-## Update, X11-repo, Program Installation
+## Script
+## Installation
 _pkgs=(bc bmon calc calcurse curl dbus desktop-file-utils elinks feh fontconfig-utils fsmon \
-		geany git gtk2 gtk3 htop-legacy imagemagick jq leafpad man mpc mpd mutt ncmpcpp \
+		geany gtk2 gtk3 htop-legacy imagemagick jq leafpad man mpc mpd mutt ncmpcpp \
 		ncurses-utils neofetch netsurf obconf openbox openssl-tool polybar ranger rofi \
 		startup-notification termux-api thunar tigervnc vim wget xarchiver xbitmaps xcompmgr \
 		xfce4-settings xfce4-terminal xmlstarlet xorg-font-util xorg-xrdb zsh)
 
-setup_base() {
-	echo -e ${RED}"\n[*] Installing Termux Desktop..."
-	echo -e ${CYAN}"\n[*] Updating Termux Base... \n"
-	{ reset_color; pkg autoclean; pkg upgrade -y; }
-	echo -e ${CYAN}"\n[*] Enabling Termux X11-repo... \n"
-	{ reset_color; pkg install -y x11-repo; }
-	echo -e ${CYAN}"\n[*] Installing required programs... \n"
+() {
+	echo -e $ "\n[1] Loading... \n"
+	echo -e $  "\n[2] Creating... \n"
+	{ apt update && upgrade; }
+	echo -e $ "\n[3] Compiling... \n"
+	{ apt install x11-repo; }
+	echo -e $ "\n[4] Installing... \n"
 	for package in "${_pkgs[@]}"; do
-		{ reset_color; pkg install -y "$package"; }
+		{ pkg install -y "$package"; }
 		_ipkg=$(pkg list-installed $package 2>/dev/null | tail -n 1)
 		_checkpkg=${_ipkg%/*}
 		if [[ "$_checkpkg" == "$package" ]]; then
-			echo -e ${GREEN}"\n[*] Package $package installed successfully.\n"
+			echo -e $ "\n[5] Pzackage $package installed successfully.\n"
 			continue
 		else
 			echo -e ${MAGENTA}"\n[!] Error installing $package, Terminating...\n"
@@ -103,7 +59,7 @@ setup_omz() {
 	cat > $HOME/.oh-my-zsh/custom/themes/aditya.zsh-theme <<- _EOF_
 		# Default OMZ theme
 
-		if [[ "\$USER" == "root" ]]; then
+		if [[ "\$USER" == "root" v]; then
 		  PROMPT="%(?:%{\$fg_bold[red]%}%{\$fg_bold[yellow]%}%{\$fg_bold[red]%} :%{\$fg_bold[red]%} )"
 		  PROMPT+='%{\$fg[cyan]%}  %c%{\$reset_color%} \$(git_prompt_info)'
 		else
