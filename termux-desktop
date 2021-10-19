@@ -204,18 +204,18 @@ setup_launcher() {
 		        echo
 		    fi
 		else
-		    echo -e "\\n[*] Starting..."
+		    echo -e "\\n[16] Starting..."
 		    vncserver
 		fi
 	_EOF_
 	if [[ -f "$file" ]]; then
-		echo -e $ "[16] Script $file Done"
+		echo -e $ "[17] Script $file Done"
 	fi
 }
 
 ## Finished
 post_msg() {
-	echo -e $ "\n[*] $ Termux Desktop $ Done \n"
+	echo -e $ "\n[18] $ Termux Desktop $ Done \n"
 	cat <<- _MSG_
 		  
 		  
@@ -223,7 +223,7 @@ post_msg() {
 	{ exit 0; }
 }
 
-## Install Termux Desktop
+## Installimg
 install_td() {
 	banner
 	setup_base
@@ -234,47 +234,47 @@ install_td() {
 	post_msg
 }
 
-## Uninstall Termux Desktop
+## Thank You
 uninstall_td() {
 	banner
 	# remove pkgs
-	echo -e ${RED}"\n[*] Unistalling Termux Desktop..."
-	echo -e ${CYAN}"\n[*] Removing Packages..."
+	echo -e $ "\n[19] Unistalling Termux Desktop..."
+	echo -e $ "\n[20] Removing Packages..."
 	for package in "${_pkgs[@]}"; do
-		echo -e ${GREEN}"\n[*] Removing Packages ${ORANGE}$package \n"
-		{ reset_color; apt-get remove -y --purge --autoremove $package; }
+		echo -e $ "\n[*] Removing Packages $package \n"
+		{ apt-get remove -y --purge --autoremove $package; }
 	done
 	
 	# delete files
-	echo -e ${CYAN}"\n[*] Deleting config files...\n"
+	echo -e $ "\n[21] Deleting config files...\n"
 	_homefiles=(.fehbg .icons .mpd .ncmpcpp .fonts .gtkrc-2.0 .mutt .themes .vnc Music)
 	_configfiles=(Thunar geany  gtk-3.0 leafpad netsurf openbox polybar ranger rofi xfce4)
 	_localfiles=(bin lib 'share/backgrounds' 'share/pixmaps')
 	for i in "${_homefiles[@]}"; do
 		if [[ -f "$HOME/$i" || -d "$HOME/$i" ]]; then
-			{ reset_color; rm -rf $HOME/$i; }
+			{ rm -rf $HOME/$i; }
 		else
-			echo -e ${MAGENTA}"\n[!] $file Doesn't Exist.\n"
+			echo -e $b"\n[!] $file Doesn't Exist.\n"
 		fi
 	done
 	for j in "${_configfiles[@]}"; do
 		if [[ -f "$HOME/.config/$j" || -d "$HOME/.config/$j" ]]; then
-			{ reset_color; rm -rf $HOME/.config/$j; }
+			{ rm -rf $HOME/.config/$j; }
 		else
-			echo -e ${MAGENTA}"\n[!] $file Doesn't Exist.\n"			
+			echo -e $ "\n[!] $file Doesn't Exist.\n"			
 		fi
 	done
 	for k in "${_localfiles[@]}"; do
 		if [[ -f "$HOME/.local/$k" || -d "$HOME/.local/$k" ]]; then
-			{ reset_color; rm -rf $HOME/.local/$k; }
+			{ rm -rf $HOME/.local/$k; }
 		else
-			echo -e ${MAGENTA}"\n[!] $file Doesn't Exist.\n"			
+			echo -e $ "\n[!] $file Doesn't Exist.\n"			
 		fi
 	done
-	echo -e ${RED}"\n[*] Termux Desktop Unistalled Successfully.\n"
+	echo -e $ "\n[*] Termux Desktop Unistalled Successfully.\n"
 }
 
-## Main
+## Bye
 if [[ "$1" == "--install" ]]; then
 	install_td
 elif [[ "$1" == "--uninstall" ]]; then
