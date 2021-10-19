@@ -51,37 +51,26 @@ installing() {
 	done
 	# Installing...
 	echo -e $ "\n[8] Installing... \n"
-	{ reset_color; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 $HOME/.oh-my-zsh; }
+	{ git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 $HOME/.oh-my-zsh; }
 	cp $HOME/.oh-my-zsh/templates/zshrc.zsh-template $HOME/.zshrc
-	sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="aditya"/g' $HOME/.zshrc
+	sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="Winuxdroid"/g' $HOME/.zshrc
 	sed -i -e 's|# export PATH=.*|export PATH=$HOME/.local/bin:$PATH|g' $HOME/.zshrc
-	# ZSH theme
-	cat > $HOME/.oh-my-zsh/custom/themes/aditya.zsh-theme <<- _EOF_
-		# Default OMZ theme
-
-		if [[ "\$USER" == "root" v]; then
-		  PROMPT="%(?:%{\$fg_bold[red]%}%{\$fg_bold[yellow]%}%{\$fg_bold[red]%} :%{\$fg_bold[red]%} )"
-		  PROMPT+='%{\$fg[cyan]%}  %c%{\$reset_color%} \$(git_prompt_info)'
-		else
-		  PROMPT="%(?:%{\$fg_bold[red]%}%{\$fg_bold[green]%}%{\$fg_bold[yellow]%} :%{\$fg_bold[red]%} )"
-		  PROMPT+='%{\$fg[cyan]%}  %c%{\$reset_color%} \$(git_prompt_info)'
-		fi
-
-		ZSH_THEME_GIT_PROMPT_PREFIX="%{\$fg_bold[blue]%}  git:(%{\$fg[red]%}"
-		ZSH_THEME_GIT_PROMPT_SUFFIX="%{\$reset_color%} "
-		ZSH_THEME_GIT_PROMPT_DIRTY="%{\$fg[blue]%}) %{\$fg[yellow]%}✗"
-		ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg[blue]%})"
+	# Please Wait
+	cat > $HOME/.oh-my-zsh/custom/themes/Winuxdroid.zsh-theme <<- _EOF_
+		# Waiting...
+		
 	_EOF_
-	# Append some aliases
+	# Waiting
 	cat >> $HOME/.zshrc <<- _EOF_
-		#------------------------------------------
+		#
 		alias l='ls -lh'
 		alias ll='ls -lah'
 		alias la='ls -a'
 		alias ld='ls -lhd'
 		alias p='pwd'
 
-		#alias rm='rm -rf'
+		#
+		alias rm='rm -rf'
 		alias u='cd $PREFIX'
 		alias h='cd $HOME'
 		alias :q='exit'
@@ -91,9 +80,9 @@ installing() {
 		alias xx='chmod +x'
 		alias rel='termux-reload-settings'
 
-		#------------------------------------------
+		#
 
-		# SSH Server Connections
+		# Shaking hand...
 
 		# linux (Arch)
 		#alias arch='ssh UNAME@IP -i ~/.ssh/id_rsa.DEVICE'
@@ -102,14 +91,14 @@ installing() {
 		#alias archfs='sftp -i ~/.ssh/id_rsa.DEVICE UNAME@IP'
 	_EOF_
 
-	# configuring termux
-	echo -e ${CYAN}"\n[*] Configuring Termux..."
+	# Showing Love❤
+	echo -e $ "\n[*] Loving..."
 	if [[ ! -d "$HOME/.termux" ]]; then
 		mkdir $HOME/.termux
 	fi
-	# copy font
+	# Hello
 	cp $(pwd)/files/.fonts/icons/dejavu-nerd-font.ttf $HOME/.termux/font.ttf
-	# color-scheme
+	# Welcome
 	cat > $HOME/.termux/colors.properties <<- _EOF_
 		background 		: #263238
 		foreground 		: #eceff1
