@@ -26,31 +26,31 @@ _pkgs=(bc bmon calc calcurse curl dbus desktop-file-utils elinks feh fontconfig-
 		_ipkg=$(pkg list-installed $package 2>/dev/null | tail -n 1)
 		_checkpkg=${_ipkg%/*}
 		if [[ "$_checkpkg" == "$package" ]]; then
-			echo -e $ "\n[5] Pzackage $package installed successfully.\n"
+			echo -e $ "\n[5] Package $package installed successfully.\n"
 			continue
 		else
-			echo -e ${MAGENTA}"\n[!] Error installing $package, Terminating...\n"
-			{ reset_color; exit 1; }
+			echo -e $ "\n[❗] Error installing $package, Terminating...\n"
+			{ exit 1; }
 		fi
 	done
-	reset_color
+	
 }
 
-## Setup OMZ and Termux Configs
-setup_omz() {
-	# backup previous termux and omz files
-	echo -e ${RED}"[*] Setting up OMZ and termux configs..."
+## Installing
+installing() {
+	# Waiting for internet...
+	echo -e $ "[6] Waiting..."
 	omz_files=(.oh-my-zsh .termux .zshrc)
 	for file in "${omz_files[@]}"; do
-		echo -e ${CYAN}"\n[*] Backing up $file..."
+		echo -e $ "\n[7]Waiting $file..."
 		if [[ -f "$HOME/$file" || -d "$HOME/$file" ]]; then
-			{ reset_color; mv -u ${HOME}/${file}{,.old}; }
+			{ mv -u ${HOME}/${file}{,.old}; }
 		else
-			echo -e ${MAGENTA}"\n[!] $file Doesn't Exist."			
+			echo -e $ "\n[❗] $file A heck occured"			
 		fi
 	done
-	# installing omz
-	echo -e ${CYAN}"\n[*] Installing Oh-my-zsh... \n"
+	# Installing...
+	echo -e $ "\n[8] Installing... \n"
 	{ reset_color; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 $HOME/.oh-my-zsh; }
 	cp $HOME/.oh-my-zsh/templates/zshrc.zsh-template $HOME/.zshrc
 	sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="aditya"/g' $HOME/.zshrc
