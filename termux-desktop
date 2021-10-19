@@ -186,16 +186,16 @@ setup_launcher() {
 		rm -rf "$file"
 	fi
 	echo -e $ "\n[15] Loading... \n"
-	{ reset_color; touch $file; chmod +x $file; }
+	{ touch $file; chmod +x $file; }
 	cat > $file <<- _EOF_
 		#!/data/data/com.termux/files/usr/bin/bash
 
-		# Export Display
+		# Waiting
 		export DISPLAY=":1"
 
-		# Start VNC Server
+		# Starting VNC SERVR
 		if [[ \$(pidof Xvnc) ]]; then
-		    echo -e "\\n[!] Server Already Running."
+		    echo -e "\\n[❗] You can only run 1 session at a time"
 		    { vncserver -list; echo; }
 		    read -p "Kill VNC Server? (Y/N) : "
 		    if [[ "\$REPLY" == "Y" || "\$REPLY" == "y" ]]; then
@@ -204,26 +204,23 @@ setup_launcher() {
 		        echo
 		    fi
 		else
-		    echo -e "\\n[*] Starting VNC Server..."
+		    echo -e "\\n[*] Starting..."
 		    vncserver
 		fi
 	_EOF_
 	if [[ -f "$file" ]]; then
-		echo -e ${GREEN}"[*] Script ${ORANGE}$file ${GREEN}created successfully."
+		echo -e $ "[16] Script $file Done"
 	fi
 }
 
-## Finish Installation
+## Finished
 post_msg() {
-	echo -e ${GREEN}"\n[*] ${RED}Termux Desktop ${GREEN}Installed Successfully.\n"
+	echo -e $ "\n[*] $ Termux Desktop $ Done \n"
 	cat <<- _MSG_
-		[-] Restart termux and enter ${ORANGE}startdesktop ${GREEN}command to start the VNC server.
-		[-] In VNC client, enter ${ORANGE}127.0.0.1:5901 ${GREEN}as Address and Password you created to connect.	
-		[-] To connect via PC over Wifi or Hotspot, use it's IP, ie: ${ORANGE}192.168.43.1:5901 ${GREEN}to connect. Also, use TigerVNC client.	
-		[-] Make sure you enter the correct port. ie: If server is running on ${ORANGE}Display :2 ${GREEN}then portmso on.
+		  
 		  
 	_MSG_
-	{ reset_color; exit 0; }
+	{ exit 0; }
 }
 
 ## Install Termux Desktop
